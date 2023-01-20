@@ -15,22 +15,22 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun PostIconButton(
-  onClick: () -> Unit = { },
-  icon: @Composable () -> Unit
+    onClick: () -> Unit = { },
+    icon: @Composable () -> Unit
 ) {
-  Box(
-      modifier = Modifier
-          .clickable(
-              onClick = onClick
-          )
-          .padding(vertical = 10.dp, horizontal = 5.dp)
-          .indication(
-              indication = rememberRipple(bounded = false, radius = 24.dp),
-              interactionSource = remember { MutableInteractionSource() }
-          )
-          .then(Modifier.size(24.dp)),
-      contentAlignment = Alignment.Center
-  ){
-      icon()
-  }
+    Box(
+        modifier = Modifier
+            .clickable(
+                onClick = onClick
+            )
+            .padding(vertical = 10.dp, horizontal = 5.dp)
+            .indication(
+                indication = rememberRipple(bounded = false, radius = 24.dp),
+                interactionSource = remember { MutableInteractionSource() }
+            )
+            .then(Modifier.size(24.dp)),
+        contentAlignment = Alignment.Center
+    ) {
+        icon()
+    }
 }

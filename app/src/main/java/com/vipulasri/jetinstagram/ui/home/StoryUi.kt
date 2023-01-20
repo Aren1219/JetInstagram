@@ -17,31 +17,31 @@ import com.vipulasri.jetinstagram.ui.components.diagonalGradientBorder
 
 @Composable
 fun StoryImage(imageUrl: String) {
-  val shape = CircleShape
-  Box(
-    modifier = Modifier
-      .diagonalGradientBorder(
-        colors = listOf(
-          Color(0xFFd71069),
-          Color(0xFFe25d6a),
-          Color(0xFFe9ad55),
-        ),
-        shape = shape,
-        isFromRight = true
-      )
-  ) {
+    val shape = CircleShape
     Box(
-      modifier = Modifier
-        .size(66.dp)
-        .padding(6.dp)
-        .background(color = Color.LightGray, shape = shape)
-        .clip(shape)
+        modifier = Modifier
+            .diagonalGradientBorder(
+                colors = listOf(
+                    Color(0xFFd71069),
+                    Color(0xFFe25d6a),
+                    Color(0xFFe9ad55),
+                ),
+                shape = shape,
+                isFromRight = true
+            )
     ) {
-      Image(
-        painter = rememberImagePainter(imageUrl),
-        contentDescription = null,
-        modifier = Modifier.fillMaxSize()
-      )
+        Box(
+            modifier = Modifier
+              .size(66.dp)
+              .padding(6.dp)
+              .background(color = Color.LightGray, shape = shape)
+              .clip(shape)
+        ) {
+            Image(
+                painter = rememberImagePainter(imageUrl),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
     }
-  }
 }

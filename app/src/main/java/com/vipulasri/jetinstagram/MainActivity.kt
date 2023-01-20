@@ -11,17 +11,17 @@ import com.vipulasri.jetinstagram.ui.theme.JetInstagramTheme
 
 class MainActivity : AppCompatActivity() {
 
-  @ExperimentalFoundationApi
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
+    @ExperimentalFoundationApi
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    this.setContent {
-      JetInstagramTheme {
-        Surface(color = MaterialTheme.colors.background) {
-          MainScreen()
+        this.setContent {
+            JetInstagramTheme {
+                Surface(color = MaterialTheme.colors.background) {
+                    MainScreen()
+                }
+            }
         }
-      }
     }
-  }
 
 }

@@ -8,34 +8,34 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @OptIn(ExperimentalCoroutinesApi::class)
 object ReelsRepository {
 
-  private val reels = arrayListOf<Reel>()
+    private val reels = arrayListOf<Reel>()
 
-  private fun populateReels() {
-    val _reels = ArrayList<Reel>()
-    (0..9).forEach { index ->
-      val post = Reel(
-          id = index + 1,
-          video = videos[index],
-          user = User(
-              name = names[index],
-              username = names[index],
-              image = "https://randomuser.me/api/portraits/men/${index + 1}.jpg"
-          ),
-          likesCount = index + 100,
-          commentsCount = index + 20
-      )
-      _reels.add(post)
+    private fun populateReels() {
+        val _reels = ArrayList<Reel>()
+        (0..9).forEach { index ->
+            val post = Reel(
+                id = index + 1,
+                video = videos[index],
+                user = User(
+                    name = names[index],
+                    username = names[index],
+                    image = "https://randomuser.me/api/portraits/men/${index + 1}.jpg"
+                ),
+                likesCount = index + 100,
+                commentsCount = index + 20
+            )
+            _reels.add(post)
+        }
+
+        reels.clear()
+        reels.addAll(_reels)
     }
 
-    reels.clear()
-    reels.addAll(_reels)
-  }
+    init {
+        populateReels()
+    }
 
-  init {
-    populateReels()
-  }
-
-  fun getReels(): List<Reel> = reels
+    fun getReels(): List<Reel> = reels
 }
 
 private val videos = listOf(
