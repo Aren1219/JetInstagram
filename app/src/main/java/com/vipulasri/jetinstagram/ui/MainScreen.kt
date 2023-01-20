@@ -28,6 +28,7 @@ import com.vipulasri.jetinstagram.ui.HomeSection.Favorite
 import com.vipulasri.jetinstagram.ui.HomeSection.Home
 import com.vipulasri.jetinstagram.ui.HomeSection.Profile
 import com.vipulasri.jetinstagram.ui.HomeSection.Reels
+import com.vipulasri.jetinstagram.ui.add.AddPost
 import com.vipulasri.jetinstagram.ui.components.bottomBarHeight
 import com.vipulasri.jetinstagram.ui.components.icon
 import com.vipulasri.jetinstagram.ui.home.Home
@@ -58,7 +59,7 @@ fun MainScreen() {
             when (section) {
                 Home -> Home()
                 Reels -> Reels()
-                Add -> Content(title = "Add Post options")
+                Add -> AddPost()
                 Favorite -> Content(title = "Favorite")
                 Profile -> Content(title = "Profile")
             }

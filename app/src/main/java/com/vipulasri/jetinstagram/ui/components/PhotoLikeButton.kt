@@ -23,22 +23,22 @@ fun DoubleTapPhotoLikeAnimation(onDoubleTap: () -> Unit) {
     }
 
     Box(
-      Modifier
-        .fillMaxSize()
-        .pointerInput(Unit) {
-          detectTapGestures(
-            onDoubleTap = {
-              // This creates a new `MutableTransitionState` object. When a new
-              // `MutableTransitionState` object gets passed to `updateTransition`, a
-              // new transition will be created. All existing values, velocities will
-              // be lost as a result. Hence, in most cases, this is not recommended.
-              // The exception is when it's more important to respond immediately to
-              // user interaction than preserving continuity.
-              transitionState = MutableTransitionState(LikedStates.Initial)
-              onDoubleTap.invoke()
+        Modifier
+            .fillMaxSize()
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onDoubleTap = {
+                        // This creates a new `MutableTransitionState` object. When a new
+                        // `MutableTransitionState` object gets passed to `updateTransition`, a
+                        // new transition will be created. All existing values, velocities will
+                        // be lost as a result. Hence, in most cases, this is not recommended.
+                        // The exception is when it's more important to respond immediately to
+                        // user interaction than preserving continuity.
+                        transitionState = MutableTransitionState(LikedStates.Initial)
+                        onDoubleTap.invoke()
+                    }
+                )
             }
-          )
-        }
     ) {
         // This ensures sequential states: Initial -> Liked -> Disappeared
         if (transitionState.currentState == LikedStates.Initial) {
@@ -96,13 +96,13 @@ fun DoubleTapPhotoLikeAnimation(onDoubleTap: () -> Unit) {
         Icon(
             ImageBitmap.imageResource(id = R.drawable.ic_filled_favorite),
             "Like",
-          Modifier
-            .align(Alignment.Center)
-            .graphicsLayer(
-              alpha = alpha,
-              scaleX = scale,
-              scaleY = scale
-            ),
+            Modifier
+                .align(Alignment.Center)
+                .graphicsLayer(
+                    alpha = alpha,
+                    scaleX = scale,
+                    scaleY = scale
+                ),
             tint = Color.White
         )
     }
