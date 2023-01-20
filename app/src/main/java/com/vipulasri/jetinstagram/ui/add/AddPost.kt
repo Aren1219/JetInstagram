@@ -25,6 +25,7 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.vipulasri.jetinstagram.data.PostsRepository
 import com.vipulasri.jetinstagram.model.currentUser
+import com.vipulasri.jetinstagram.model.names
 
 @Preview(showBackground = true, widthDp = 360, heightDp = 640)
 @Composable
@@ -122,35 +123,42 @@ private fun AddFundraiser() {
     ExpandableSection(name = "Add Fundraiser") {}
 }
 
-@OptIn(ExperimentalCoilApi::class)
 @Composable
 private fun PostToOtherInstagramAccounts() {
     ExpandableSection(name = "Post To Other Instagram Accounts") {
-        var selected by remember {
-            mutableStateOf(false)
-        }
-        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Box(
-                modifier = Modifier
-                    .size(50.dp)
-                    .padding(6.dp)
-                    .background(color = Color.LightGray, shape = CircleShape)
-                    .clip(CircleShape)
-            ) {
-                Image(
-                    painter = rememberImagePainter(currentUser.image),
-                    contentDescription = "",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
-            Text(text = currentUser.name)
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = selected,
-                onCheckedChange = { selected = !selected },
+        InstagramAccountToggle(name = currentUser.name, image = currentUser.image)
+        InstagramAccountToggle(name = names[0], image = "https://randomuser.me/api/portraits/men/1.jpg")
+        InstagramAccountToggle(name = names[1], image = "https://randomuser.me/api/portraits/men/2.jpg")
+    }
+}
+
+@OptIn(ExperimentalCoilApi::class)
+@Composable
+private fun InstagramAccountToggle(name: String, image: String) {
+    var selected by remember {
+        mutableStateOf(false)
+    }
+    Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Box(
+            modifier = Modifier
+                .size(50.dp)
+                .padding(6.dp)
+                .background(color = Color.LightGray, shape = CircleShape)
+                .clip(CircleShape)
+        ) {
+            Image(
+                painter = rememberImagePainter(image),
+                contentDescription = "",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
             )
         }
+        Text(text = name)
+        Spacer(modifier = Modifier.weight(1f))
+        Switch(
+            checked = selected,
+            onCheckedChange = { selected = !selected },
+        )
     }
 }
 
