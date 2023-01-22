@@ -1,12 +1,9 @@
 package com.vipulasri.jetinstagram.ui.add
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -190,7 +187,11 @@ private fun ExpandableSection(name: String, content: @Composable () -> Unit) {
         mutableStateOf(false)
     }
     Column() {
-        Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { shouldExpand = !shouldExpand }) {
             Text(
                 text = name,
                 style = MaterialTheme.typography.subtitle1,
@@ -244,7 +245,9 @@ private fun AdvancedSettings() {
     Column {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(start = 12.dp)
+            modifier = Modifier
+                .padding(start = 12.dp)
+                .clickable { shouldExpand = !shouldExpand }
         ) {
             Text(text = "Advanced Settings")
             IconButton(onClick = { shouldExpand = !shouldExpand }) {
