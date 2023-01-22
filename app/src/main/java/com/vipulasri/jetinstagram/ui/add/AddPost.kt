@@ -104,7 +104,20 @@ private fun Post() {
 
 @Composable
 private fun TagPeople() {
-    ExpandableSection(name = "Tag People") {}
+    ExpandableSection(name = "Tag People") {
+        InstagramAccountToggle(
+            name = names[2],
+            image = "https://randomuser.me/api/portraits/men/2.jpg"
+        )
+        InstagramAccountToggle(
+            name = names[3],
+            image = "https://randomuser.me/api/portraits/men/3.jpg"
+        )
+        InstagramAccountToggle(
+            name = names[4],
+            image = "https://randomuser.me/api/portraits/men/4.jpg"
+        )
+    }
 }
 
 @Preview(showBackground = true)
@@ -113,6 +126,7 @@ private fun AddLocation() {
     ExpandableSection(name = "Add Location") {
         Text(
             text = "Tap here to show location suggestions",
+            color = Color.Gray,
             modifier = Modifier.padding(12.dp)
         )
     }
@@ -120,15 +134,23 @@ private fun AddLocation() {
 
 @Composable
 private fun AddFundraiser() {
-    ExpandableSection(name = "Add Fundraiser") {}
+    ExpandableSection(name = "Add Fundraiser") {
+        Spacer(Modifier.height(40.dp))
+    }
 }
 
 @Composable
 private fun PostToOtherInstagramAccounts() {
     ExpandableSection(name = "Post To Other Instagram Accounts") {
         InstagramAccountToggle(name = currentUser.name, image = currentUser.image)
-        InstagramAccountToggle(name = names[0], image = "https://randomuser.me/api/portraits/men/1.jpg")
-        InstagramAccountToggle(name = names[1], image = "https://randomuser.me/api/portraits/men/2.jpg")
+        InstagramAccountToggle(
+            name = names[0],
+            image = "https://randomuser.me/api/portraits/men/1.jpg"
+        )
+        InstagramAccountToggle(
+            name = names[1],
+            image = "https://randomuser.me/api/portraits/men/2.jpg"
+        )
     }
 }
 
@@ -188,7 +210,12 @@ private fun ExpandableSection(name: String, content: @Composable () -> Unit) {
 
 @Composable
 private fun MediaPlatformTogglesList() {
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
         MediaPlatformToggle(name = "Face Book")
         MediaPlatformToggle(name = "Twitter")
     }
@@ -202,7 +229,7 @@ private fun MediaPlatformToggle(name: String) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 12.dp, top = 12.dp)
+            .padding(start = 12.dp)
     ) {
         Text(text = name)
         Switch(checked = selected, onCheckedChange = { selected = !selected })
@@ -211,11 +238,29 @@ private fun MediaPlatformToggle(name: String) {
 
 @Composable
 private fun AdvancedSettings() {
-    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 12.dp)) {
-        Text(text = "Advanced Settings")
-        IconButton(onClick = { /*TODO*/ }) {
-            Icon(Icons.Default.KeyboardArrowRight, contentDescription = "",
-            modifier = Modifier.size(20.dp))
+    var shouldExpand by remember {
+        mutableStateOf(false)
+    }
+    Column {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(start = 12.dp)
+        ) {
+            Text(text = "Advanced Settings")
+            IconButton(onClick = { shouldExpand = !shouldExpand }) {
+                Icon(
+                    if (!shouldExpand)
+                        Icons.Default.KeyboardArrowRight
+                    else
+                        Icons.Default.KeyboardArrowDown,
+                    contentDescription = "",
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+        }
+        if (shouldExpand) {
+            Spacer(modifier = Modifier.size(40.dp))
+            Divider()
         }
     }
 }
