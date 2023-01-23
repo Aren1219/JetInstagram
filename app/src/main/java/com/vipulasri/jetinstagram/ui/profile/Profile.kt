@@ -1,8 +1,7 @@
 package com.vipulasri.jetinstagram.ui.profile
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.CircleShape
@@ -14,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -33,7 +33,6 @@ import com.vipulasri.jetinstagram.ui.theme.lightBlue
 fun Profile() {
     Scaffold(
         topBar = { ProfileToolbar() }) {
-        val posts by PostsRepository.posts
         val stories by StoriesRepository.observeStories()
 
         Column {
@@ -248,8 +247,7 @@ fun ProfileButtons() {
 }
 
 @Composable
-fun ProfileTopBar(
-) {
+fun ProfileTopBar() {
     var tabIndex by remember {
         mutableStateOf(0)
     }
@@ -265,6 +263,7 @@ fun ProfileTopBar(
             }
         }
     }
+    if (tabIndex == 0) ShoppingGrid()
 }
 
 @OptIn(ExperimentalCoilApi::class)

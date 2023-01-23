@@ -124,27 +124,6 @@ fun SearchBar(searchTerm: String, onTextChange: (String) -> Unit) {
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun ContentLazyColumn(searchTerm: String) {
-//    val list = listOf(
-//        "Kyree Ridgeway",
-//        "Rebeca Wilhelm",
-//        "Tierra Peyton",
-//        "Gabriel Hebert",
-//        "Ibrahim Burdick",
-//        "Helen Weiner",
-//        "Marvin Batchelor",
-//        "Kiera Pollard",
-//        "Truman Kessler",
-//        "Truman Kessler",
-//        "Truman Kessler",
-//        "Truman Kessler",
-//        "Truman Kessler",
-//        "Truman Kessler",
-//        "Truman Kessler",
-//        "Truman Kessler",
-//        "Truman Kessler",
-//        "Truman Kessler",
-//        "Ammon Portillo"
-//    )
     val list = StoriesRepository.observeStories()
     LazyColumn(
         modifier = Modifier
@@ -159,13 +138,12 @@ fun ContentLazyColumn(searchTerm: String) {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Image(
-                        rememberImagePainter(item.image),
+                        painter = rememberImagePainter(item.image),
                         contentDescription = "",
                         modifier = Modifier
                             .size(50.dp)
                             .clip(shape = CircleShape),
                         contentScale = ContentScale.Crop,
-
                         )
                     Spacer(modifier = Modifier.width(10.dp))
                     Column {
@@ -208,4 +186,3 @@ fun ContentLazyColumn(searchTerm: String) {
             })
     }
 }
-
