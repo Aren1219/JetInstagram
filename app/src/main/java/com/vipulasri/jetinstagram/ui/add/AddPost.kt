@@ -95,7 +95,7 @@ private fun Post() {
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent
             ),
-            placeholder = { Text(text = "Write a caption") }
+            placeholder = { Text(text = "Write a caption...") }
         )
     }
 }
@@ -211,15 +211,8 @@ private fun ExpandableSection(name: String, content: @Composable () -> Unit) {
 
 @Composable
 private fun MediaPlatformTogglesList() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-//            .padding(12.dp),
-//        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        MediaPlatformToggle(name = "Face Book")
-        MediaPlatformToggle(name = "Twitter")
-    }
+    MediaPlatformToggle(name = "Face Book")
+    MediaPlatformToggle(name = "Twitter")
 }
 
 @Composable
@@ -231,7 +224,8 @@ private fun MediaPlatformToggle(name: String) {
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { selected = !selected }.padding(12.dp)
+            .clickable { selected = !selected }
+            .padding(12.dp)
     ) {
         Text(
             text = name,
