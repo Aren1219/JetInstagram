@@ -154,26 +154,27 @@ private fun PostToOtherInstagramAccounts() {
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-private fun InstagramAccountToggle(name: String, image: String) {
+private fun InstagramAccountToggle(name: String, image: String, modifier: Modifier = Modifier) {
     var selected by remember {
         mutableStateOf(false)
     }
-    Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-        Box(
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
+            .clickable { selected = !selected },
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = rememberImagePainter(image),
+            contentDescription = "",
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(50.dp)
-                .padding(6.dp)
-                .background(color = Color.LightGray, shape = CircleShape)
                 .clip(CircleShape)
-        ) {
-            Image(
-                painter = rememberImagePainter(image),
-                contentDescription = "",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
-            )
-        }
-        Text(text = name)
+                .border(2.dp, Color.Gray, CircleShape)
+        )
+        Text(text = name, modifier = Modifier.padding(12.dp))
         Spacer(modifier = Modifier.weight(1f))
         Switch(
             checked = selected,
@@ -187,27 +188,25 @@ private fun ExpandableSection(name: String, content: @Composable () -> Unit) {
     var shouldExpand by remember {
         mutableStateOf(false)
     }
-    Column() {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { shouldExpand = !shouldExpand }) {
-            Text(
-                text = name,
-                style = MaterialTheme.typography.subtitle1,
-                modifier = Modifier.padding(12.dp)
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { shouldExpand = !shouldExpand }) {
+        Text(
+            text = name,
+            style = MaterialTheme.typography.subtitle1,
+            modifier = Modifier.padding(12.dp)
+        )
+        IconButton(onClick = { shouldExpand = !shouldExpand }) {
+            Icon(
+                if (!shouldExpand) Icons.Default.KeyboardArrowRight
+                else Icons.Default.KeyboardArrowDown,
+                contentDescription = ""
             )
-            IconButton(onClick = { shouldExpand = !shouldExpand }) {
-                Icon(
-                    if (!shouldExpand) Icons.Default.KeyboardArrowRight
-                    else Icons.Default.KeyboardArrowDown,
-                    contentDescription = ""
-                )
-            }
         }
-        if (shouldExpand) content()
     }
+    if (shouldExpand) content()
 }
 
 @Composable
@@ -215,8 +214,8 @@ private fun MediaPlatformTogglesList() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+//            .padding(12.dp),
+//        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         MediaPlatformToggle(name = "Face Book")
         MediaPlatformToggle(name = "Twitter")
@@ -229,11 +228,15 @@ private fun MediaPlatformToggle(name: String) {
         mutableStateOf(false)
     }
     Row(
-        horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 12.dp)
+            .clickable { selected = !selected }.padding(12.dp)
     ) {
-        Text(text = name)
+        Text(
+            text = name,
+            style = MaterialTheme.typography.subtitle1,
+        )
         Switch(checked = selected, onCheckedChange = { selected = !selected })
     }
 }
