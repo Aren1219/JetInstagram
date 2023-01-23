@@ -86,7 +86,7 @@ private fun Toolbar() {
 }
 
 @Composable
-private fun StoriesSection(stories: List<Story>) {
+fun StoriesSection(stories: List<Story>) {
     Column {
         StoriesList(stories)
         Spacer(modifier = Modifier.height(10.dp))
@@ -94,7 +94,7 @@ private fun StoriesSection(stories: List<Story>) {
 }
 
 @Composable
-private fun StoriesList(stories: List<Story>) {
+fun StoriesList(stories: List<Story>) {
     LazyRow {
         itemsIndexed(stories) { index, story ->
 

@@ -31,7 +31,9 @@ import com.vipulasri.jetinstagram.ui.HomeSection.Reels
 import com.vipulasri.jetinstagram.ui.add.AddPost
 import com.vipulasri.jetinstagram.ui.components.bottomBarHeight
 import com.vipulasri.jetinstagram.ui.components.icon
+import com.vipulasri.jetinstagram.ui.fav_page.FavScaffold
 import com.vipulasri.jetinstagram.ui.home.Home
+import com.vipulasri.jetinstagram.ui.profile.Profile
 import com.vipulasri.jetinstagram.ui.reels.Reels
 
 @ExperimentalFoundationApi
@@ -60,8 +62,8 @@ fun MainScreen() {
                 Home -> Home()
                 Reels -> Reels()
                 Add -> AddPost()
-                Favorite -> Content(title = "Favorite")
-                Profile -> Content(title = "Profile")
+                Favorite -> FavScaffold()
+                Profile -> Profile()
             }
         }
     }

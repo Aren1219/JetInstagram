@@ -48,23 +48,23 @@ fun AddPost() {
 
 @Composable
 private fun AddPostTopBar() {
-    TopAppBar(backgroundColor = MaterialTheme.colors.surface) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Default.ArrowBack, contentDescription = "")
-            }
-            Text(text = "New Post", style = MaterialTheme.typography.h5)
-            ClickableText(
-                text = AnnotatedString("Share", SpanStyle(Color.Blue)),
-                style = MaterialTheme.typography.h6,
-                onClick = {},
-            )
+//    TopAppBar(backgroundColor = MaterialTheme.colors.surface) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(Icons.Default.ArrowBack, contentDescription = "")
         }
+        Text(text = "New Post", style = MaterialTheme.typography.h5)
+        ClickableText(
+            text = AnnotatedString("Share", SpanStyle(Color.Blue)),
+            style = MaterialTheme.typography.h6,
+            onClick = {},
+        )
     }
+//    }
 }
 
 @OptIn(ExperimentalCoilApi::class)
