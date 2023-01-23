@@ -27,6 +27,7 @@ import com.vipulasri.jetinstagram.data.PostsRepository
 import com.vipulasri.jetinstagram.data.StoriesRepository
 import com.vipulasri.jetinstagram.ui.components.*
 import com.vipulasri.jetinstagram.ui.home.StoriesSection
+import com.vipulasri.jetinstagram.ui.theme.lightBlue
 
 
 @Composable
@@ -38,10 +39,8 @@ fun Profile() {
 
         Column {
             Row(modifier = Modifier.padding(end = 16.dp)) {
-                ProfileDescription()
-
-                ProfileImage(imageUrl = stories.first().image)
-
+                ProfileDescription(modifier = Modifier.weight(3f))
+                ProfileImage(imageUrl = stories.first().image, modifier = Modifier.weight(1f).aspectRatio(1f))
             }
             ProfileButtons()
             LazyColumn {
@@ -84,11 +83,10 @@ fun ProfileToolbar() {
 }
 
 @Composable
-fun ProfileDescription() {
+fun ProfileDescription(modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .width(260.dp)
+        modifier = modifier
+            .padding(horizontal = 16.dp)
     ) {
         val muted = Color.LightGray
 
@@ -162,10 +160,10 @@ fun ProfileDescription() {
 }
 
 @Composable
-fun ProfileImage(imageUrl: String) {
+fun ProfileImage(imageUrl: String, modifier: Modifier= Modifier) {
     val shape = CircleShape
     Box(
-        modifier = Modifier
+        modifier = modifier
             .diagonalGradientBorder(
                 colors = listOf(
                     Color(0xFFd71069),
@@ -178,15 +176,15 @@ fun ProfileImage(imageUrl: String) {
     ) {
         Box(
             modifier = Modifier
-                .size(100.dp)
                 .padding(6.dp)
                 .background(color = Color.LightGray, shape = shape)
                 .clip(shape)
         ) {
             Image(
+                modifier = Modifier.fillMaxSize(),
                 painter = rememberImagePainter(imageUrl),
                 contentDescription = null,
-                modifier = Modifier.fillMaxSize()
+                contentScale = ContentScale.Crop
             )
         }
     }
@@ -201,7 +199,7 @@ fun ProfileButtons() {
             Button(
                 modifier = Modifier.width(180.dp),
                 onClick = { /*TODO*/ },
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Blue),
+                colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue),
             ) {
                 Text(
                     text = "Follow",
