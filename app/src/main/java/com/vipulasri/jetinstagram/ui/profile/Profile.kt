@@ -1,7 +1,6 @@
 package com.vipulasri.jetinstagram.ui.profile
 
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.CircleShape
@@ -13,7 +12,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -27,7 +25,6 @@ import com.vipulasri.jetinstagram.model.Post
 import com.vipulasri.jetinstagram.ui.components.*
 import com.vipulasri.jetinstagram.ui.home.StoriesSection
 import com.vipulasri.jetinstagram.ui.theme.lightBlue
-
 
 @Composable
 fun Profile() {
@@ -53,7 +50,7 @@ fun Profile() {
                 }
             }
             ProfileTopBar()
-            ShoppingGrid()
+//            ShoppingGrid()
         }
     }
 }
@@ -195,52 +192,45 @@ fun ProfileImage(imageUrl: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun ProfileButtons() {
-    Column() {
-        Row(
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp)
-        ) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .padding(4.dp)
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
             Button(
-                modifier = Modifier.width(180.dp),
-                onClick = { /*TODO*/ },
-                colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue),
+                onClick = { /*TODO*/ }, modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(4.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
             ) {
-                Text(
-                    text = "Follow",
-                    color = Color.White
-                )
+                Text(text = "Follow", color = Color.White)
             }
-            Spacer(modifier = Modifier.size(16.dp))
             Button(
-                modifier = Modifier.width(180.dp),
-                onClick = { /*TODO*/ },
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                onClick = { /*TODO*/ }, modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(4.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
             ) {
-                Text(
-                    text = "Message",
-                )
+                Text(text = "Email")
             }
         }
-        Row(
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp)
-        ) {
+        Column(modifier = Modifier.weight(1f)) {
             Button(
-                modifier = Modifier.width(180.dp),
-                onClick = { /*TODO*/ },
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                onClick = { /*TODO*/ }, modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(4.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
             ) {
-                Text(
-                    text = "Email",
-                )
+                Text(text = "Message")
             }
-            Spacer(modifier = Modifier.size(16.dp))
             Button(
-                modifier = Modifier.width(180.dp),
-                onClick = { /*TODO*/ },
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                onClick = { /*TODO*/ }, modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(4.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
             ) {
-                Text(
-                    text = "Browse",
-                )
+                Text(text = "Browse")
             }
         }
     }
@@ -263,7 +253,13 @@ fun ProfileTopBar() {
             }
         }
     }
-    if (tabIndex == 0) ShoppingGrid()
+    when (tabIndex) {
+        0 -> ShoppingGrid()
+        1 -> Text(text = "List")
+        2 -> Text(text = "IGTV")
+        3 -> Text(text = "Shop")
+        4 -> Text(text = "Tagged")
+    }
 }
 
 @OptIn(ExperimentalCoilApi::class)
