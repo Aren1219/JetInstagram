@@ -10,8 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -251,43 +250,19 @@ fun ProfileButtons() {
 @Composable
 fun ProfileTopBar(
 ) {
-    Row(
-        modifier = Modifier.fillMaxWidth()
+    var tabIndex by remember {
+        mutableStateOf(0)
+    }
+    val tabData = listOf("Grid", "List", "IGTV", "Shop", "Tagged")
+    TabRow(
+        selectedTabIndex = tabIndex,
+        modifier = Modifier.height(50.dp),
+        backgroundColor = Color.White
     ) {
-        Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier.padding(8.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-        ) {
-            Text(text = "Grid")
-        }
-        Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier.padding(8.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-        ) {
-            Text(text = "List")
-        }
-        Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier.padding(8.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-        ) {
-            Text(text = "IGTV")
-        }
-        Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier.padding(7.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-        ) {
-            Text(text = "Shop")
-        }
-        Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier.padding(7.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-        ) {
-            Text(text = "Tagged")
+        tabData.forEachIndexed { index, text ->
+            Tab(selected = tabIndex == index, onClick = { tabIndex = index }) {
+                Text(text = text)
+            }
         }
     }
 }
