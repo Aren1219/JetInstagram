@@ -17,14 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-import com.vipulasri.jetinstagram.R
 import com.vipulasri.jetinstagram.data.PostsRepository
 import com.vipulasri.jetinstagram.data.StoriesRepository
+import com.vipulasri.jetinstagram.model.Post
 import com.vipulasri.jetinstagram.ui.components.*
 import com.vipulasri.jetinstagram.ui.home.StoriesSection
 import com.vipulasri.jetinstagram.ui.theme.lightBlue
@@ -40,7 +40,12 @@ fun Profile() {
         Column {
             Row(modifier = Modifier.padding(end = 16.dp)) {
                 ProfileDescription(modifier = Modifier.weight(3f))
-                ProfileImage(imageUrl = stories.first().image, modifier = Modifier.weight(1f).aspectRatio(1f))
+                ProfileImage(
+                    imageUrl = stories.first().image,
+                    modifier = Modifier
+                        .weight(1f)
+                        .aspectRatio(1f)
+                )
             }
             ProfileButtons()
             LazyColumn {
@@ -160,7 +165,7 @@ fun ProfileDescription(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ProfileImage(imageUrl: String, modifier: Modifier= Modifier) {
+fun ProfileImage(imageUrl: String, modifier: Modifier = Modifier) {
     val shape = CircleShape
     Box(
         modifier = modifier
@@ -287,11 +292,12 @@ fun ProfileTopBar(
     }
 }
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun ShoppingCard(
+    post: Post,
     modifier: Modifier = Modifier
 ) {
-    val stories by StoriesRepository.observeStories()
 
     Card(
         elevation = 12.dp,
@@ -303,13 +309,13 @@ fun ShoppingCard(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_dm),
+                painter = rememberImagePainter(post.image),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.height(100.dp)
             )
             Text(
-                text = ("Hello World"),
+                text = (post.user.name),
                 style = MaterialTheme.typography.h3.copy(fontSize = 12.sp),
                 modifier = Modifier.padding(8.dp)
             )
@@ -325,8 +331,8 @@ fun ShoppingGrid(modifier: Modifier = Modifier) {
         contentPadding = PaddingValues(horizontal = 16.dp),
         modifier = modifier
     ) {
-        items(10) {
-            ShoppingCard(modifier = Modifier.padding(16.dp))
+        items(PostsRepository.posts.value) { item ->
+            ShoppingCard(modifier = Modifier.padding(16.dp), post = item)
         }
     }
 }
